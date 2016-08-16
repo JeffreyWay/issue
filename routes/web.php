@@ -14,5 +14,5 @@ use App\Events\UserSignedUp;
 */
 
 Route::get('using-facade', function () {
-    Event::fire(new UserSignedUp('John', 30));
+    Event::fire(new UserSignedUp('John', 25));
 });
