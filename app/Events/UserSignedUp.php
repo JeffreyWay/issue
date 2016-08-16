@@ -13,18 +13,16 @@ class UserSignedUp
 {
     use InteractsWithSockets, SerializesModels;
 
-    public $name, $age;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($name, $age)
+    public function __construct($user)
     {
-        //
-        $this->name = $name;
-        $this->age = $age;
+        $this->user = $user;
     }
 
     /**

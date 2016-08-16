@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use App\Events\UserSignedUp;
 
 /*
@@ -14,5 +15,9 @@ use App\Events\UserSignedUp;
 */
 
 Route::get('using-facade', function () {
-    Event::fire(new UserSignedUp('John', 25));
+    // app('events')->fire(new UserSignedUp(new User)); // works
+
+    // Event::fire(new UserSignedUp(new User)); // works
+
+    event(new UserSignedUp(new User)); // does not work
 });

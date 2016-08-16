@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\UserSignedUp;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -13,9 +14,15 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        Event::shouldReceive('fire')->once();
+        $mock = Mockery::mock('Illuminate\Events\Dispatcher')->shouldIgnoreMissing();
 
-        $this->visit('/using-facade');
+        $mock->shouldReceive('fire')->once()->with(Mockery::on(function ($event) {
+            return $event->user instanceof \App\User;
+        }));
+
+        app()->instance('events', $mock);
+
+        $this->visit('using-facade');
     }
 }
 
